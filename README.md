@@ -21,7 +21,7 @@ The minimum version of the recommended operating system is Windows Server 2003 w
 **Main arguments:**
 
         url                      (Optional) String that contains a properly formed
-                                 [UrlPrefix](https://docs.microsoft.com/es-es/windows/win32/http/urlprefix-strings) that identifies the URL to be registered:
+                                 Url-Prefix that identifies the URL to be registered:
                                  http://host:port/
 								 
         root_directory Root      directory that will serve as a web hosting.

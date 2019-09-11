@@ -1,0 +1,20 @@
+LIBRARY HTTPAPI.dll
+EXPORTS
+HttpAddFragmentToCache@20
+HttpAddUrl@12
+HttpCreateHttpHandle@8
+HttpDeleteServiceConfiguration@20
+HttpFlushResponseCache@16
+HttpInitialize@12
+HttpQueryServiceConfiguration@32
+HttpReadFragmentFromCache@28
+HttpReceiveClientCertificate@28
+HttpReceiveHttpRequest@32
+HttpReceiveRequestEntityBody@32
+HttpRemoveUrl@8
+HttpSendHttpResponse@44
+HttpSendResponseEntityBody@44
+HttpSetServiceConfiguration@20
+HttpTerminate@8
+HttpWaitForDemandStart@8
+HttpWaitForDisconnect@12
