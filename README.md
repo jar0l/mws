@@ -10,7 +10,7 @@ This application is a console executable for x86 processors, and it doesn’t re
 
 The minimum version of the recommended operating system is Windows Server 2003 with SP1 and Windows XP with SP2.
 
-# Usage:
+**Usage:**
 
         smws [url] root_directory
         dmws [url] root_directory
@@ -18,7 +18,7 @@ The minimum version of the recommended operating system is Windows Server 2003 w
         lzsmws [url] root_directory
         lzdmws [url] root_directory
 		
-# Main arguments:
+**Main arguments:**
 
         url                      (Optional) String that contains a properly formed
                                  [UrlPrefix](https://docs.microsoft.com/es-es/windows/win32/http/urlprefix-strings) that identifies the URL to be registered:
@@ -26,7 +26,7 @@ The minimum version of the recommended operating system is Windows Server 2003 w
 								 
         root_directory Root      directory that will serve as a web hosting.
 
-# Other arguments:
+**Other arguments:**
 
         --stop                   Stops the server from the specified URL. It isn't
                                  necessary to indicate the URL if the server was started
@@ -34,7 +34,7 @@ The minimum version of the recommended operating system is Windows Server 2003 w
 								 
         --log                    Log server operations in the specified file.
 		
-# Examples:
+**Examples:**
 
         smws "..\My Root Folder"
         start http://localhost:8080
