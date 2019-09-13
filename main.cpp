@@ -41,12 +41,10 @@
 
 //------------------------------------------------------------------------------------
 
-#define MAX_ULONG_STR ((ULONG) sizeof("4294967295"))
-
 #define INITIALIZE_HTTP_RESPONSE(resp, status, reason)      \
-    do                                                      \
+	do                                                      \
     {                                                       \
-        RtlZeroMemory( (resp), sizeof(*(resp)) );           \
+		RtlZeroMemory( (resp), sizeof(*(resp)) );           \
         (resp)->StatusCode = (status);                      \
         (resp)->pReason = (reason);                         \
         (resp)->ReasonLength = (USHORT) strlen(reason);     \
@@ -55,7 +53,7 @@
 #define ADD_KNOWN_HEADER(Response, HeaderId, RawValue)               		 \
     do                                                               		 \
     {                                                                		 \
-        (Response).Headers.KnownHeaders[(HeaderId)].pRawValue =  (RawValue); \
+        (Response).Headers.KnownHeaders[(HeaderId)].pRawValue = (RawValue);  \
         (Response).Headers.KnownHeaders[(HeaderId)].RawValueLength = 		 \
             (USHORT) strlen(RawValue);                               		 \
     } while(FALSE)
@@ -444,14 +442,14 @@ DWORD WINAPI HttpResponseThread (LPVOID lpParam)
 		, 0
 		, NULL 
 	);
-	
-	RtlZeroMemory(&response, sizeof(HTTP_RESPONSE));
 
 	if(g_hFile == INVALID_HANDLE_VALUE)
-		response.StatusCode = 404;
+		INITIALIZE_HTTP_RESPONSE(&response, 404, NULL);
 
 	else
 	{
+		RtlZeroMemory(&dataChunk, sizeof(HTTP_DATA_CHUNK));
+
 		dataChunk.DataChunkType                                    = HttpDataChunkFromFileHandle;
 		dataChunk.FromFileHandle.ByteRange.StartingOffset.QuadPart = 0;
 		dataChunk.FromFileHandle.ByteRange.Length.QuadPart         = HTTP_BYTE_RANGE_TO_EOF;
@@ -504,11 +502,11 @@ DWORD SendHttpResponse ()
 	g_hThread = CreateThread
 	(
 		  NULL
-        , 0
+		, 0
 		, HttpResponseThread
 		, NULL
-        , 0
-        , NULL
+		, 0
+		, NULL
 	);
 	
 	if (g_hThread != NULL)
@@ -625,7 +623,7 @@ DWORD DoReceiveRequests ()
 			g_RequestId = pRequest->RequestId;
 			g_pAbsPath  = pRequest->CookedUrl.pAbsPath;
 			
-            g_now  = std::chrono::system_clock::now();
+			g_now  = std::chrono::system_clock::now();
 			g_date = std::chrono::system_clock::to_time_t(g_now);
 			g_mwsout << "\n" << std::ctime(&g_date);
 			
@@ -914,7 +912,7 @@ int main (int argc, char **argv)
 	}
 
 	bUrlAdded = TRUE;
-    g_now     = std::chrono::system_clock::now();
+	g_now     = std::chrono::system_clock::now();
 	g_date    = std::chrono::system_clock::to_time_t(g_now);
 	
 	g_mwsout << std::ctime(&g_date)
