@@ -42,9 +42,9 @@
 //------------------------------------------------------------------------------------
 
 #define INITIALIZE_HTTP_RESPONSE(resp, status, reason)      \
-	do                                                      \
+    do                                                      \
     {                                                       \
-		RtlZeroMemory( (resp), sizeof(*(resp)) );           \
+        RtlZeroMemory( (resp), sizeof(*(resp)) );           \
         (resp)->StatusCode = (status);                      \
         (resp)->pReason = (reason);                         \
         (resp)->ReasonLength = (USHORT) strlen(reason);     \
@@ -53,7 +53,7 @@
 #define ADD_KNOWN_HEADER(Response, HeaderId, RawValue)               		 \
     do                                                               		 \
     {                                                                		 \
-        (Response).Headers.KnownHeaders[(HeaderId)].pRawValue = (RawValue);  \
+        (Response).Headers.KnownHeaders[(HeaderId)].pRawValue =  (RawValue); \
         (Response).Headers.KnownHeaders[(HeaderId)].RawValueLength = 		 \
             (USHORT) strlen(RawValue);                               		 \
     } while(FALSE)
