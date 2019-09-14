@@ -44,16 +44,16 @@
 #define INITIALIZE_HTTP_RESPONSE(resp, status, reason)      \
     do                                                      \
     {                                                       \
-        RtlZeroMemory( (resp), sizeof(*(resp)) );           \
+        RtlZeroMemory((resp), sizeof(*(resp)));             \
         (resp)->StatusCode = (status);                      \
         (resp)->pReason = (reason);                         \
-        (resp)->ReasonLength = (USHORT) strlen(reason);     \
+        (resp)->ReasonLength = (USHORT)strlen(reason);      \
     } while (FALSE)
 
 #define ADD_KNOWN_HEADER(Response, HeaderId, RawValue)               		 \
     do                                                               		 \
     {                                                                		 \
-        (Response).Headers.KnownHeaders[(HeaderId)].pRawValue =  (RawValue); \
+        (Response).Headers.KnownHeaders[(HeaderId)].pRawValue = (RawValue);  \
         (Response).Headers.KnownHeaders[(HeaderId)].RawValueLength = 		 \
             (USHORT) strlen(RawValue);                               		 \
     } while(FALSE)
@@ -444,8 +444,11 @@ DWORD WINAPI HttpResponseThread (LPVOID lpParam)
 	);
 
 	if(g_hFile == INVALID_HANDLE_VALUE)
-		INITIALIZE_HTTP_RESPONSE(&response, 404, NULL);
-
+	{
+		RtlZeroMemory(response, sizeof(HTTP_RESPONSE));
+        response->StatusCode = 404;
+	}
+	
 	else
 	{
 		RtlZeroMemory(&dataChunk, sizeof(HTTP_DATA_CHUNK));
