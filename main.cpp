@@ -771,17 +771,33 @@ int main (int argc, char **argv)
 			nTmp = fqUrl.length() - 1;
 			if (fqUrl.rfind(L'/') ==  nTmp)
 				fqUrl.erase(nTmp, 1);
-
-			nTmp = fqUrl.rfind(L':');
-			if (nTmp != std::wstring::npos && fqUrl.find(L'/') != nTmp + 1)
-			{
-				port = std::stoi(fqUrl.substr(nTmp + 1));
-				fqUrl.erase(nTmp);
-			}
-
+			
 			nTmp = fqUrl.rfind(L'/');
 			if (nTmp != std::wstring::npos)
 				fqUrl = fqUrl.substr(nTmp + 1);
+
+			nTmp = fqUrl.rfind(L':');
+			if (nTmp != std::wstring::npos)
+			{
+				try
+				{
+					port = std::stoi(fqUrl.substr(nTmp + 1));
+				}
+				
+				catch (std::exception& e)
+				{
+					std::cout << g_szError << g_szUrlError;
+					return -2;
+				}
+				
+				fqUrl.erase(nTmp);
+			}
+			
+			else
+			{
+				std::cout << g_szError << g_szUrlError;
+				return -2;
+			}
 
 			hIntSession = InternetOpenA
 			(
